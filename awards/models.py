@@ -11,17 +11,18 @@ class Projects(models.Model):
     
     
     def __str__(self):
-        return self.projects
+        return self.title
     
     
     def save_projects(self):
         self.save()
-    
-    def delete_projects(self):
-        self.delete()
         
-    def update_projects(self):
-        self.update()
+    @classmethod
+    def search_by_projects(cls,username):
+       certain_user = cls.objects.filter(user__username__icontains=username)
+       
+       return  certain_user
+    
     
 
 class Profile(models.Model):
@@ -38,10 +39,5 @@ class Profile(models.Model):
     def save_profile(self):
         self.save()
     
-    def delete_profile(self):
-        self.delete()
-        
-    def update_profile(self):
-        self.update()
         
         

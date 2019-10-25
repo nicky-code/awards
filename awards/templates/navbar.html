@@ -7,24 +7,27 @@
           
           <div class="col-sm-6 col-md-6">
                 {% if user.is_authenticated %}
-                <ul>
-                  <li class="dropdown">
+                  <div class="dropdown">
                     <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button" aria-expanded="false">Account
                               <span class="caret"></span>
                           </a>
-                    <ul class="dropdown-menu" role="menu">
-                      <li>
+                    <div class="dropdown-menu" role="menu">
+                      <p>
                         <a href="{%url 'welcome'%}">Home</a>
-                      </li>
-                      <li>
+                      </p>
+                      <p>
                         <a href="/accounts/password/change">Change Password</a>
-                      </li>
-                      <li>
+                      </p>
+                      <p>
+                        <a href="{%url 'new_project'%}">Create a POST</a>
+                      </p>
+                    </p>
+                      <p>
                         <a href="/logout">Logout</a>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
+                      </p>
+                    </div>
+                  </div>
+                </div>
                 {% else %}
                 <li>
                   <a class='btn btn-default' href="/accounts/login">Login</a>
