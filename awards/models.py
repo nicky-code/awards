@@ -1,7 +1,8 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
-class Projects(models,Model):
+class Projects(models.Model):
     title = models.CharField(max_length =30)
     image = models.ImageField(upload_to ='images/',null=True)
     project_description = models.CharField(max_length=250)
@@ -23,7 +24,7 @@ class Projects(models,Model):
         self.update()
     
 
-class Profile(models,Model):
+class Profile(models.Model):
     profile_picture = models.ImageField(upload_to ='pictures/',null=True)
     bio = models.CharField(max_length=30,null=True)
     posted_projects = models.TextField()
