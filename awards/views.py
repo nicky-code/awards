@@ -4,7 +4,11 @@ from django.shortcuts import render
 from .models import Projects,Profile
 from .forms import ProjectForm,ProfileForm
 from django.contrib.auth.decorators import login_required
+from rest_framework.response import Response
+from rest_framework.views import APIView
 from rest_framework import serializers
+from .serializer import ProjectSerializer,ProfileSerializer
+from rest_framework import status
 
 
 
@@ -82,3 +86,18 @@ def myProfile(request):
    myProfile = Profile.objects.filter(user = current_user).first()
    return render(request, 'profile.html', {"all_projects":all_projects, "myProfile":myProfile})
 
+
+class ProjectsList(APIView):
+    
+    def get(self, request, format=None):
+        all_projects = Projects.objects.all()
+        serializers = ProjectSerializer(all_projects, many=True)
+        return Response(serializers.data)
+    
+    
+class ProfileList(APIView):
+    
+    def get(self, request, format=None):
+        all_profiles = Profile.objects.all()
+        serializers = ProfileSerializer(all_profiles, many=True)
+        return Response(serializers.data)
