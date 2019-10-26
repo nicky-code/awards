@@ -32,3 +32,16 @@ def new_project(request):
     
     return render(request, 'new_project.html',{"form":form})
 
+
+@login_required(login_url='/accounts/login/')
+def search_titles(request):
+    
+   if 'title' in request.GET and request.GET["title"]:
+       search_term = request.GET.get("title")
+       searched_title = Projects.search_by_title(search_term)
+       print(searched_title)
+       message = f"{search_term}"
+       return render(request, "all-awards/search.html",{"message":message,"titles": searched_title})
+   else:
+       message = "You haven't searched for any term"
+       return render(request, 'all-awards/search.html',{"message":message})

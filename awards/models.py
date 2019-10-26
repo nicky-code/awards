@@ -18,8 +18,8 @@ class Projects(models.Model):
         self.save()
         
     @classmethod
-    def search_by_projects(cls,username):
-       certain_user = cls.objects.filter(user__username__icontains=username)
+    def search_by_title(cls,title):
+       certain_user = cls.objects.filter(title__icontains=title)
        
        return  certain_user
     
