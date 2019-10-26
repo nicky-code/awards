@@ -4,6 +4,11 @@ from django.shortcuts import render
 from .models import Projects,Profile
 from .forms import ProjectForm,ProfileForm
 from django.contrib.auth.decorators import login_required
+from rest_framework import serializers
+
+
+
+
 # Create your views here.
 
 @login_required(login_url='/accounts/login/')
@@ -76,3 +81,4 @@ def myProfile(request):
    all_projects = Projects.objects.filter(user=current_user)
    myProfile = Profile.objects.filter(user = current_user).first()
    return render(request, 'profile.html', {"all_projects":all_projects, "myProfile":myProfile})
+
