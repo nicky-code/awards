@@ -40,4 +40,9 @@ class Profile(models.Model):
         self.save()
     
         
-        
+    def delete_profile(self):
+        self.delete()
+    
+    @classmethod    
+    def update_profile(self):
+        self.update()    

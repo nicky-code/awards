@@ -1,8 +1,8 @@
 from django.shortcuts import render,redirect
 from django.http  import HttpResponse
 from django.shortcuts import render
-from .models import Projects
-from .forms import ProjectForm
+from .models import Projects,Profile
+from .forms import ProjectForm,ProfileForm
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
@@ -45,3 +45,31 @@ def search_titles(request):
    else:
        message = "You haven't searched for any term"
        return render(request, 'all-awards/search.html',{"message":message})
+
+
+@login_required(login_url='/accounts/login/')
+def new_profile(request):
+    
+    current_user = request.user
+    profil = Profile.objects.filter(id=current_user.id)
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            photo = form.save(commit=False)
+            photo.user = current_user
+            photo.save()
+        return redirect('myProfile')
+
+    else:
+        form = ProfileForm()
+    
+    return render(request, 'new-profile.html',{"form":form})
+
+
+@login_required(login_url='/accounts/login/')
+def myProfile(request):
+    
+   current_user = request.user 
+   all_images = Image.objects.filter(user=current_user)
+   myProfile = Profile.objects.filter(user = current_user).first()
+   return render(request, 'profile.html', {"all_images":all_images, "myProfile":myProfile})
