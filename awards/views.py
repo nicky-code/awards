@@ -10,9 +10,12 @@ from django.contrib.auth.decorators import login_required
 def welcome(request):
     
     project=Projects.objects.all()
+    awards_users=Profile.objects.all()
     current_user = request.user
+    myProfile = Profile.objects.filter(user = current_user).first()
+    print(project)
     
-    return render(request, 'welcome.html',{"project":project})
+    return render(request, 'welcome.html',{"project":project},"awards_users":awards_users,"myProfile":myProfile)
 
 
 @login_required(login_url='/accounts/login/')
@@ -70,6 +73,6 @@ def new_profile(request):
 def myProfile(request):
     
    current_user = request.user 
-   all_images = Image.objects.filter(user=current_user)
+   all_projects = Projects.objects.filter(user=current_user)
    myProfile = Profile.objects.filter(user = current_user).first()
-   return render(request, 'profile.html', {"all_images":all_images, "myProfile":myProfile})
+   return render(request, 'profile.html', {"all_projects":all_projects, "myProfile":myProfile})

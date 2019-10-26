@@ -1,0 +1,36 @@
+{%extends 'all-awards/base.html'%}
+{% load bootstrap4 %} {% load staticfiles %}
+{% block content %}
+{{block.super}}
+<style>
+.profile{
+    border-radius: 80%;
+    width: 10%;
+    height: 10%;
+}
+</style>
+
+  <div class="container" style="padding-left: 3%">
+
+    <div class="pro">
+          
+            <img src="{{myProfile.profile_photo.url}}" class="profile">
+            
+          
+    </div> 
+    <hr> 
+    <div class="imag"> 
+      {%for proj in all_projects%}       
+       
+        <button type="button"  data-toggle="modal" data-target="#{{proj.id}}">
+            <img src="{{proj.image.url}}" width="350" height="300" class="img-responsive" style="justify-content: space-between;padding:1%" alt="Image">
+        </button>
+
+        {% empty %}
+  <div class="row">
+    <h2 class="text-center">There No News Items</h2>
+  </div>
+
+        {% endfor %}
+      </div>
+    </div>

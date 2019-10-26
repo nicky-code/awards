@@ -1,7 +1,7 @@
 <nav style="background-color:rgb(0, 225, 255)" class="navbar navbar-inverse">
         <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" href="{% url 'welcome' %}">AWARDS</a>
+            <a class="navbar-brand" href="{% url 'welcome' %}" style="font-style: italic;font-size:50px">AWARDS</a>
           </div>
           <!-- Adding a search form  -->
     <form  action="{% url 'searchs' %}"class="search text-center" style="margin-top: 2%; margin-left:5%;">
@@ -23,9 +23,12 @@
                         <a href="/accounts/password/change">Change Password</a>
                       </p>
                       <p>
+                        <a href="{%url 'profile'%}">Create a Profile</a>
+                      </p>
+                      <p>
                         <a href="{%url 'new_project'%}">Create a POST</a>
                       </p>
-                    </p>
+
                       <p>
                         <a href="/logout">Logout</a>
                       </p>
@@ -33,11 +36,17 @@
                   </div>
                 </div>
                 {% else %}
-                <li>
+                <p>
                   <a class='btn btn-default' href="/accounts/login">Login</a>
-                </li>
+                </p>
     
                 {% endif %}
+                <div class="col-sm-6 col-md-6">
+                    <p>
+                      <a href="{%url 'myProfile'%}">Profile</a>
+                    </p>
+
+                </div>
               </div>
         </div>
       </nav>
