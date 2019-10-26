@@ -15,7 +15,7 @@ def welcome(request):
     myProfile = Profile.objects.filter(user = current_user).first()
     print(project)
     
-    return render(request, 'welcome.html',{"project":project},"awards_users":awards_users,"myProfile":myProfile)
+    return render(request, 'welcome.html',{"project":project,"awards_users":awards_users,"myProfile":myProfile})
 
 
 @login_required(login_url='/accounts/login/')
