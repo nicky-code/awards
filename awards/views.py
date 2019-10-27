@@ -107,7 +107,7 @@ class ProfileList(APIView):
         return Response(serializers.data)
 
 
-#I have Found this on github user="MaryannGitonga"
+#I have found this on github user="MaryannGitonga"
 @login_required(login_url='/accounts/login/')
 def rating(request,id):
     myProject=Projects.objects.get(id=id)
