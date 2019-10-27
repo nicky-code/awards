@@ -1,5 +1,6 @@
 from django import forms
 from .models import Projects,Profile
+from django.forms import ModelForm
 
 
 class ProjectForm(forms.ModelForm):
@@ -17,3 +18,9 @@ class ProfileForm(forms.ModelForm):
         # widgets = {
         #     'tags': forms.CheckboxSelectMultiple(),
         # }
+        
+
+class VoteForm(forms.ModelForm):
+    class Meta:
+        model = Projects
+        fields = ('design','usability','content')
