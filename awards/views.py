@@ -2,14 +2,14 @@ from django.shortcuts import render,redirect
 from django.http  import HttpResponse
 from django.shortcuts import render
 from .models import Projects,Profile
-from .forms import ProjectForm,ProfileForm
+from .forms import ProjectForm,ProfileForm,VoteForm
 from django.contrib.auth.decorators import login_required
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import serializers
 from .serializer import ProjectSerializer,ProfileSerializer
 from rest_framework import status
-
+from django.db.models import Max,F
 
 # Create your views here.
 
@@ -22,7 +22,13 @@ def welcome(request):
     myProfile = Profile.objects.filter(user = current_user).first()
     print(project)
     
-    return render(request, 'welcome.html',{"project":project,"awards_users":awards_users,"myProfile":myProfile})
+    average=0
+    
+    for proj in project:
+        average = (proj.design + proj.usability + proj.content)/3
+        best_rating = round(average,2)
+
+    return render(request, 'welcome.html',{"project":project,"awards_users":awards_users,"myProfile":myProfile,'best_rating':best_rating'})
 
 
 @login_required(login_url='/accounts/login/')
@@ -99,3 +105,31 @@ class ProfileList(APIView):
         all_profiles = Profile.objects.all()
         serializers = ProfileSerializer(all_profiles, many=True)
         return Response(serializers.data)
+
+
+#I have Found this on github user="MaryannGitonga"
+@login_required(login_url='/accounts/login/')
+def rating(request,id):
+    myProject=Projects.objects.get(id=id)
+    rating = round(((myProject.design + myProject.usability + myProject.content)/3),1)
+    if request.method == 'POST':
+        form = VoteForm(request.POST)
+        if form.is_valid:
+            myProject.submission_votes += 1
+            if myProject.design == 0:
+                myProject.design = int(request.POST['design'])
+            else:
+                myProject.design = (myProject.design + int(request.POST['design']))/2
+            if myProject.usability == 0:
+                myProject.usability = int(request.POST['usability'])
+            else:
+                myProject.usability = (myProject.design + int(request.POST['usability']))/2
+            if myProject.content == 0:
+                myProject.content = int(request.POST['content'])
+            else:
+                myProject.content = (myProject.design + int(request.POST['content']))/2
+            myProject.save()
+            return redirect('welcome')
+    else:
+        form = VoteForm()
+    return render(request,'vote.html',{'form':form,'myProject':myProject,'rating':rating})    
