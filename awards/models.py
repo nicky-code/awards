@@ -6,9 +6,13 @@ class Projects(models.Model):
     title = models.CharField(max_length =30)
     image = models.ImageField(upload_to ='images/',null=True)
     project_description = models.CharField(max_length=250)
-    link = models.CharField(max_length =30)
+    link = models.TextField()
     user=models.ForeignKey(User,on_delete=models.CASCADE)
-    
+    design = models.IntegerField(choices=list(zip(range(0, 11), range(0, 11))), default=0)
+    usability = models.IntegerField(choices=list(zip(range(0, 11), range(0, 11))), default=0)
+    content = models.IntegerField(choices=list(zip(range(0, 11), range(0, 11))), default=0)
+    # submission_votes = models.IntegerField(default=0)
+
     
     def __str__(self):
         return self.title
@@ -16,6 +20,9 @@ class Projects(models.Model):
     
     def save_projects(self):
         self.save()
+        
+    def delete_projects(self):
+        self.delete()
         
     @classmethod
     def search_by_title(cls,title):
@@ -28,7 +35,7 @@ class Projects(models.Model):
 class Profile(models.Model):
     profile_picture = models.ImageField(upload_to ='pictures/',null=True)
     bio = models.CharField(max_length=30,null=True)
-    posted_projects = models.TextField()
+    posted_projects = models.ForeignKey(Projects,null=True)
     user_contact= models.CharField(max_length=30,null=True)
     user= models.ForeignKey(User,on_delete=models.CASCADE)
     

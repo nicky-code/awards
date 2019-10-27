@@ -11,8 +11,6 @@ from .serializer import ProjectSerializer,ProfileSerializer
 from rest_framework import status
 
 
-
-
 # Create your views here.
 
 @login_required(login_url='/accounts/login/')
