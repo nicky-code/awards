@@ -4,10 +4,10 @@
 {{block.super}}
 <style>
 .profile{
-    
-    width: 30%;
+    border-radius: 60%;
+    width: 25%;
     height: 30%;
-    margin-top: 5%;
+    margin-top: 2%;
 }
 </style>
 
@@ -16,6 +16,9 @@
     <div class="pro">
           
             <img src="{{myProfile.profile_picture.url}}" class="profile">
+            <span><p class="bio">Bio: {{myProfile.bio}}</p></span>
+            <span><p class="contact">Contact: {{myProfile.user_contact}}</p></span>
+
             
           
     </div> 
@@ -24,7 +27,7 @@
       {%for proj in all_projects%}       
        
         <button type="button"  data-toggle="modal" data-target="#{{proj.id}}">
-            <img src="{{proj.image.url}}" width="350" height="300" class="img-responsive" style="justify-content: space-between;padding:1%" alt="Image">
+            <img src="{{proj.image.url}}" width="270" height="250" class="img-responsive" style="justify-content: space-between;padding:1%" alt="Image">
         </button>
 
         {% empty %}

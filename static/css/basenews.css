@@ -2,7 +2,7 @@
 #award{
   background-image: url('https://media.istockphoto.com/photos/gold-light-awards-background-picture-id904124342?k=6&m=904124342&s=612x612&w=0&h=avJgCy8OvUyHljixKqt9gWEkREqH1nVwUZUJ4S6OLnI=');
   border: 1px solid black;
-  height:290px;
+  height:350px;
   width: 100%;
   margin: 0.5%;
   
@@ -17,4 +17,14 @@
   margin-left: 35%;
   font-size: 25px;
 
+}
+.bio{
+  margin-left: 50%;
+  margin-bottom: 3%;
+  margin-top: -10%;
+}
+.contact{
+  margin-left: 50%;
+  margin-bottom: 2%;
+  margin-top: -0.45%;
 }
