@@ -20,10 +20,7 @@ class Projects(models.Model):
     
     def save_projects(self):
         self.save()
-        
-    def delete_projects(self):
-        self.delete()
-        
+    
     @classmethod
     def search_by_title(cls,title):
        certain_user = cls.objects.filter(title__icontains=title)

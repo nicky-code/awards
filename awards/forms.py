@@ -6,7 +6,7 @@ from django.forms import ModelForm
 class ProjectForm(forms.ModelForm):
     class Meta:
         model = Projects
-        exclude = ['user']
+        exclude = ['user','design','usability','content','submission_votes']
         # widgets = {
         #     'tags': forms.CheckboxSelectMultiple(),
         # }
@@ -14,7 +14,7 @@ class ProjectForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        exclude = ['user', 'profile','user_id']
+        exclude = ['user','user_id']
         # widgets = {
         #     'tags': forms.CheckboxSelectMultiple(),
         # }

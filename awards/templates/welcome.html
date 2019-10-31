@@ -14,8 +14,14 @@
         {{ block.super}} 
 
 <div class="container">
-    <div class="row">
-        <img src="https://media.istockphoto.com/photos/gold-light-awards-background-picture-id904124342?k=6&m=904124342&s=612x612&w=0&h=avJgCy8OvUyHljixKqt9gWEkREqH1nVwUZUJ4S6OLnI=" width="100%" height="40%" style="margin: 0.2%">
+       
+    <div class="row" id="award">
+        <div class="design">
+            <span><p>Design</p></span>
+            <span><p>Usability</p></span>
+            <span><p>Content</p></span>
+          
+        </div>
 
     </div>
     <div class="row masonry-container">
@@ -28,49 +34,15 @@
                 <p>{{pro.project_description}}</p>
                 <a href="{{pro.link}}"><strong>click here to view the project</strong></a>
 
-                <a href="{% url 'rating' id=pro.id %}" data-toggle="modal" data-target="#{{pro.id}}" >Vote</a>
+                <a href="{% url 'rating' id=pro.id %}" >Vote</a>
                 <p><strong>design:</strong>{{pro.design}}</p>
                 <p><strong>usability:</strong>{{pro.usability}}</p>
                 <p><strong>content:</strong>{{pro.content}}</p>
-                <p>By <span>{{pro.user.username}}</span>with<span>{{rating}}</span></p>
+                <p>By <span>{{pro.user.username}}</span><span>{{rating}}</span></p>
             </div>
         </div>
     </div>
-    <!-- #Modal parts -->
-    <div class="modal fade" id="{{pro.id}}" tabindex="-1" role="dialog"  aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title"><strong>{{pro.title}}</strong></h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    
-                  </button>
-                </div>
-                <div class="modal-body">
-                   <img src="{{pro.image.url}}" class="img-responsive" alt="Image">
-                   <p><strong>design:</strong>{{pro.design}}</p>
-                   <p><strong>usability:</strong>{{pro.usability}}</p>
-                   <p><strong>content:</strong>{{pro.content}}</p>
-                
-                </div>
-
-
-                <!-- I just found this modal footer of copying a link on github -->
-                <div class="modal-footer">
-                    <input class="form-control" type="text" value="{{ pro.image.url }}" id="link">
-                    
-      
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    
-                  </div>
-        </div>
-      </div>
-      </div>
-
-
-
-
+    
     {% endfor %}
 </div>
 </div>
