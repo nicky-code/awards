@@ -42,19 +42,21 @@ class ProjectsTestClass(TestCase):
         self.assertFalse(len(project)==1)
 
 
-# class ProfileTestClass(TestCase):
-#     '''
-#     a class to test the profile instances and its methods
-#     '''
+class ProfileTestClass(TestCase):
+    '''
+    a class to test the profile instances and its methods
+    '''
 
-#     # Set up method
-#     def setUp(self):
-#         self.user = User.objects.create(id=1,username='nicky')
-#         self.profile= Profile(profile_picture='',bio='alinenicole',posted_projects='Our favorites Pizzas', link='https://nicky-code.github.io/PizzaLover/',design='7',usability='8',content='7',user=self.user)
+    # Set up method
+    def setUp(self):
+        self.user = User.objects.create(id=1,username='nicky')
+        self.projects= Projects(title='Sodo-Ni Pizzeria',image='',project_description='Our favorites Pizzas', link='https://nicky-code.github.io/PizzaLover/',design='7',usability='8',content='7',user=self.user)
+        self.profile= Profile(profile_picture='',bio='alinenicole',posted_projects=self.projects,user=self.user)
     
-#     #Testing Instance
-#     def test_instance(self):
-#         self.assertTrue(isinstance(self.projects,Projects))
+    #Testing Instance
+    def test_instance(self):
+        self.assertTrue(isinstance(self.profile,Profile))
+        self.assertTrue(isinstance(self.projects,Projects))
         
     
     # #Testing the save method
