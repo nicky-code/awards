@@ -51,7 +51,7 @@ class ProfileTestClass(TestCase):
     def setUp(self):
         self.user = User.objects.create(id=1,username='nicky')
         self.projects= Projects(title='Sodo-Ni Pizzeria',image='',project_description='Our favorites Pizzas', link='https://nicky-code.github.io/PizzaLover/',design='7',usability='8',content='7',user=self.user)
-        self.profile= Profile(profile_picture='',bio='alinenicole',posted_projects=self.projects,user=self.user)
+        self.profile= Profile(profile_picture='',bio='alinenicole',user=self.user)
     
     #Testing Instance
     def test_instance(self):
@@ -59,14 +59,24 @@ class ProfileTestClass(TestCase):
         self.assertTrue(isinstance(self.projects,Projects))
         
     
-    # #Testing the save method
-    # '''
-    # function to check the save method of Projects
-    # '''
+    #Testing the save method
+    '''
+    function to check the save method of Profile
+    '''
     
-    # def test_save_method(self):
-    #     self.image.save_projects()
-    #    images =Projects.objects.all()
-    #    self.assertTrue(len(images)>0)
+    def test_save_method(self):
+        self.profile.save_profile()
+        profile =Profile.objects.all()
+        self.assertTrue(len(profile)>0)
 
            
+    #Testing the delete method
+    def test_delete_method(self):
+        '''
+        function to check the delete method of profile
+        '''
+        self.profile.save_profile()
+        profil= Profile.objects.filter(profile_picture='').first()
+        delete= Profile.objects.filter(id=profil.id).delete()
+        profile =Profile.objects.all()
+        self.assertFalse(len(profile)==1)
